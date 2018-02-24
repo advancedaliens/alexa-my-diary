@@ -1,0 +1,4 @@
+Dynamo DB table for Ver1
+------------------------
+
+posts - {id, status, text, voice, url} 
