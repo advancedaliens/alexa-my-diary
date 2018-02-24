@@ -1,9 +1,27 @@
 <html>
   <head><title>Advanced Aliens - Polly Study Notes Generator</title>
+  
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+  
+  
+  
     <link rel="stylesheet" href="styles.css">
 
   </head>
-  <body><h1>Hello Advanced Aliens!</h1>
+  <body>
+  
+  <center><h1>Hello Advanced Aliens!</h1></center>
 
     <div id="content">
 
@@ -53,17 +71,40 @@
         <option value="Astrid">Astrid [Swedish]</option>
         <option value="Filiz">Filiz [Turkish]</option>
         <option value="Gwyneth">Gwyneth [Welsh]</option>
-
         
       </select>
+      
+       </br> </br>
+      
+       User:
 
-      <input type="submit" value="Say it!" id="sayButton" class="buttons">
-
+      <select id="userSelected">
+        <option value="user1">User1</option>
+        <option value="user2">User2</option>
+        <option value="user3">User3</option>
+        <option value="user4">User4</option>
+      </select>
+      
+      </br> </br>
+      
+      
+      <div class='input-group date' id='datetimepicker6'>
+       Date Time:
+          <input type='text' class="form-control" />
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+       </div>
+            
       <span id="postIDreturned"></span>
     </br></br>
 
     <textarea id ="postText"></textarea>
     <span id="charCounter">Characters: 0</span>
+    
+    </br> </br>
+
+      <input type="submit" value="Store My Note" id="storeButton" class="buttons">
 
     </br></br></br></br>
       Provide post ID which you want to retrieve: <input type="text" id="postId"> <input type="submit" class="buttons" value="Search" id="searchButton">
@@ -91,8 +132,6 @@
         </tbody>
       </table>
 
-
     <script src="scripts.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
   </body>
 </html>
