@@ -46,6 +46,8 @@ document.getElementById("searchButton").onclick = function(){
 
 						$("#posts").append("<tr> \
 								<td>" + data['id'] + "</td> \
+								<td>" + data['user'] + "</td> \
+								<td>" + data['time'] + "</td> \
 								<td>" + data['voice'] + "</td> \
 								<td>" + data['text'] + "</td> \
 								<td>" + data['status'] + "</td> \
