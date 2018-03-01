@@ -8,6 +8,9 @@ document.getElementById("storeButton").onclick = function(){
 		"time" : $("#datetimepicker6").data("DateTimePicker").date(),
 		"text" : $('#postText').val()
 	};
+	
+	//var debugData = JSON.stringify(inputData);
+	//alert(debugData);
 
 	$.ajax({
 	      url: API_ENDPOINT,
@@ -25,12 +28,13 @@ document.getElementById("storeButton").onclick = function(){
 
 
 document.getElementById("searchButton").onclick = function(){
-
-	var postId = $('#postId').val();
-
+	
+	var postIdSearch = $('#postIdSearch').val();
+	var usernameSearch = $('#usernameSearch').val();
+	var timeSearch = $('#timeSearch').val();
 
 	$.ajax({
-				url: API_ENDPOINT + '?postId='+postId,
+				url:  API_ENDPOINT + '?postId='+postIdSearch + '&user='+usernameSearch + '&time='+timeSearch,
 				type: 'GET',
 				success: function (response) {
 
