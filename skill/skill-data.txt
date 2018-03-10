@@ -1,0 +1,39 @@
+This is a text file used to document sample utterences and also some useful information about the skill
+
+. Invocation Name: my diary
+
+. Interaction model for GetNewFactIntent
+
+tell me about my day
+tell me about my day for {username} on {notedate}
+
+.. for slot username
+
+Utterances:
+
+for which user?
+
+Prompts:
+
+{username}
+for {username}
+
+.. for slot notedate
+
+Prompts:
+
+for which day?
+on which day?
+
+Utterances:
+
+for {notedate}
+{notedate}
+
+
+Sample uttrences:
+
+tell me about my day for user10 on 14th feb 2018
+tell me about my day for user10 on feb 14th 2018
+tell me about my day for user10 on 2018 14th feb
+tell me about my day for user10 on 2018 feb 14th
