@@ -14,7 +14,23 @@ var handlers = {
     },
 
     'GetNewFactIntent': function () {
-        var say = 'Hello Alien!';
+        
+        console.log("this.event.request.dialogState:", this.event.request.dialogState);
+        
+                if (this.event.request.dialogState == "STARTED" || this.event.request.dialogState == "IN_PROGRESS"){
+            this.context.succeed({
+                "response": {
+                    "directives": [
+                        {
+                            "type": "Dialog.Delegate"
+                        }
+                    ],
+                    "shouldEndSession": false
+                },
+                "sessionAttributes": {}
+            });
+        } else {
+             var say = 'Hello Alien!';
          
         const { slots } = this.event.request.intent;
         
@@ -23,6 +39,8 @@ var handlers = {
              
         var userVal = slots.username.value;
 		var timeVal = slots.notedate.value;
+		
+		userVal = userVal.toLowerCase();
 	
 		console.log("value1 = " + userVal);
 		console.log("value1 = " + timeVal);
@@ -32,7 +50,7 @@ var handlers = {
 			say = 'Hello Alien! You need to enter both user name and date to get the note from your diary.';
 			this.emit(':tell', say );
 		} else {
-		
+		    
 			var filterConditionsData = '(#username = :username) AND contains (#notetime, :notetime)';
 			var expressionAttributeNamesData = {
 							    '#s3url': "url",
@@ -57,7 +75,7 @@ var handlers = {
         
         getNote(params, myResult=>{
         
-        	if (myResult && myResult[0] &&myResult[0].url) {
+        	if (myResult && myResult[0] && myResult[0].url) {
         		say = say + '<audio src=\"' + myResult[0].url + '" />\'';
         	} else {
         		say = say + ' No note available for ' + userVal + ' on ' + timeVal;
@@ -68,19 +86,20 @@ var handlers = {
              this.emit(':tell', say );          
 });
 		}    
+        }
        
     },
 
     'AMAZON.HelpIntent': function () {
-         this.emit(':ask', 'Learn everything you need to know about Amazon Web Services to pass your exam by listening to your very own study notes. You can start by saying, Ryan help me study.', 'try again');
+         this.emit(':ask', 'Ask my diary to get the notes from your journal. You can specify an user and date to get notes', 'try again');
      },
 
      'AMAZON.CancelIntent': function () {
-         this.emit(':tell', 'Goodbye Cloud Gurus');
+         this.emit(':tell', 'Goodbye Advanced Alien!');
      },
 
      'AMAZON.StopIntent': function () {
-         this.emit(':tell', 'Goodbye Cloud Gurus');
+         this.emit(':tell', 'Goodbye Advanced Alien!');
      }
 };
 
