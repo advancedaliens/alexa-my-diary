@@ -7,7 +7,7 @@ logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     
-    logger.info('testing2 logging got event{}'.format(event))
+    logger.info('got event{}'.format(event))
     
     user = event.get('user', None)
     postId = event.get('postId', None)
