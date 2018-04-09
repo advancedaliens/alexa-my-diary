@@ -38,54 +38,54 @@ var handlers = {
         console.log("got the slot for notedate:" + slots.notedate.value);
              
         var userVal = slots.username.value;
-		var timeVal = slots.notedate.value;
-		
-		userVal = userVal.toLowerCase();
-	
-		console.log("value1 = " + userVal);
-		console.log("value1 = " + timeVal);
-	
-		if (!(userVal && timeVal)) {
-			console.log("gdg either userVal or timeVal or both are unavailable");
-			say = 'Hello Alien! You need to enter both user name and date to get the note from your diary.';
-			this.emit(':tell', say );
-		} else {
-		    
-			var filterConditionsData = '(#username = :username) AND contains (#notetime, :notetime)';
-			var expressionAttributeNamesData = {
-							    '#s3url': "url",
-							    '#username':"user",
-							    '#notetime':"time"
-		};
-			
-		var expressionAttributeValuesData = {
-			    ':username' : userVal,
-			    ':notetime' : timeVal
-		};
-	
-	
-	var params = {
-		TableName : process.env.TABLE_NAME,
-		ProjectionExpression: '#s3url',
-		ExpressionAttributeNames: expressionAttributeNamesData,
+        var timeVal = slots.notedate.value;
+        
+        userVal = userVal.toLowerCase();
+    
+        console.log("value1 = " + userVal);
+        console.log("value1 = " + timeVal);
+    
+        if (!(userVal && timeVal)) {
+            console.log("either userVal or timeVal or both are unavailable");
+            say = 'Hello Alien! You need to enter both user name and date to get the note from your diary.';
+            this.emit(':tell', say );
+        } else {
+            
+            var filterConditionsData = '(#username = :username) AND contains (#notetime, :notetime)';
+            var expressionAttributeNamesData = {
+                                '#noteText': "text",
+                                '#username':"user",
+                                '#notetime':"time"
+        };
+            
+        var expressionAttributeValuesData = {
+                ':username' : userVal,
+                ':notetime' : timeVal
+        };
+    
+    
+    var params = {
+        TableName : process.env.TABLE_NAME,
+        ProjectionExpression: '#noteText',
+        ExpressionAttributeNames: expressionAttributeNamesData,
    FilterExpression: filterConditionsData,
    ExpressionAttributeValues: expressionAttributeValuesData
-	};
+    };
         
         
         getNote(params, myResult=>{
         
-        	if (myResult && myResult[0] && myResult[0].url) {
-        		say = say + '<audio src=\"' + myResult[0].url + '" />\'';
-        	} else {
-        		say = say + ' No note available for ' + userVal + ' on ' + timeVal;
-        	} 
+            if (myResult && myResult[0] && myResult[0].text) {
+                say = say + myResult[0].text;
+            } else {
+                say = say + ' No note available for ' + userVal + ' on ' + timeVal;
+            } 
             
             console.log("after:", say);
             
              this.emit(':tell', say );          
 });
-		}    
+        }    
         }
        
     },
