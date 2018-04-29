@@ -75,8 +75,21 @@ var handlers = {
         
         getNote(params, myResult=>{
         
-            if (myResult && myResult[0] && myResult[0].text) {
-                say = say + myResult[0].text;
+            if (myResult) {
+                
+                console.log("Number of notes available:", myResult.length);
+                
+                if (myResult.length > 1) {
+                    say = say + "There are " + myResult.length + " notes available";
+                    
+                    for (var i=0; i<myResult.length; i++ ) {
+                        say = say + "Note:" + i + ": " + myResult[i].text;
+                    }
+                    
+                } else {
+                    say = say + myResult[0].text;
+                }
+                
             } else {
                 say = say + ' No note available for ' + userVal + ' on ' + timeVal;
             } 
